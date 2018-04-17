@@ -20,7 +20,9 @@ const fetchTopStories = function() {
     });
 }
 
-fetchTopStories()
+window.addEventListener('load', () => {
+
+  fetchTopStories()
   .then(stories => {
     console.log(stories)
     let storiesHtml = '';
@@ -35,3 +37,5 @@ fetchTopStories()
     document.getElementById('main').insertAdjacentHTML('beforeend', storiesHtml);
   })
   // catch fallback - error page
+
+});
