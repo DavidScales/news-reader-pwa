@@ -20,22 +20,39 @@ const fetchTopStories = function() {
     });
 }
 
+const renderStory = function(story) {
+  storyHtml =
+    `<section class="card">
+      <h3 class="card-title">
+        <a href="${story.url}" target='_blank'>${story.title}</a>
+      </h3>
+      <p>
+        <span class="time primary-alt">${timeSince(story.time)} </span>
+        by
+        <span class="by primary-alt"> ${story.by}</span>
+      </p>
+      <p><span class="primary-alt">${story.score}</span> points</p>
+    </section>`
+  return storyHtml;
+}
+
+const renderStories = function(stories) {
+  return stories
+    .filter(story => story.type === 'story')
+    .map(renderStory)
+    .join('');
+}
+
 window.addEventListener('load', () => {
 
   fetchTopStories()
   .then(stories => {
-    console.log(stories)
-    let storiesHtml = '';
-    stories.forEach(story => {
-      storiesHtml +=
-        `<ul>
-          <li>Title: ${story.title}</li>
-          <li>by: ${story.by}</li>
-        </ul>`
-    });
+    let storiesHtml = renderStories(stories);
     document.getElementById('loading').style.display = 'none';
-    document.getElementById('main').insertAdjacentHTML('beforeend', storiesHtml);
+    document.getElementById('container').insertAdjacentHTML('beforeend', storiesHtml);
   })
   // catch fallback - error page
 
 });
+
+
