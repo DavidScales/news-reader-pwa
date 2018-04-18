@@ -116,28 +116,13 @@ function injectManifest() {
     swDest: './dist/sw.js',
     globDirectory: './dist/',
     globPatterns: [
-    //   '**/*.css',
-    //   'index.html',
-    //   'js/animation.js',
-    //   'images/home/*.jpg',
-    //   'images/icon/*.svg',
-    //   'pages/offline.html',
-    //   'pages/404.html'
+      'index.html',
+      'images/**/*.{svg,png,jpg}'
     ]
   }).catch(err => {
     console.log('Uh oh 😬', err);
   });
 }
-
-// function injectManifest() {
-//   return workboxBuild.injectManifest({
-//     globDirectory: './dist/',
-//     globPatterns: [ 'img/*.{svg,png,jpg}', 'index.html', 'inline.css' ],
-//     globIgnores: ['admin.html'],
-//     swSrc: './src/sw.js',
-//     swDest: './dist/sw.js'
-//   });
-// }
 
 // Start local dev server and rebuild on file changes
 function watch() {
@@ -158,7 +143,7 @@ function watch() {
   gulp.watch(paths.root.src, dist);
   gulp.watch(paths.images.src, copy, injectManifest);
 
-  gulp.watch('dist/index.html', browserSync.reload);
+  // gulp.watch('dist/index.html', browserSync.reload);
 }
 
 var dist = gulp.series(gulp.parallel(copy, styles, scripts), inline, injectManifest);
