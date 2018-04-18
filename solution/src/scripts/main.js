@@ -1,21 +1,20 @@
 const apiBaseUrl = 'https://hacker-news.firebaseio.com/v0';
 
-const fetchStory = function(storyId) {
-  const storyUrl = `${apiBaseUrl}/item/${storyId}.json`
-  return fetch(storyUrl)
-    .then(response => response.json());
-}
-
-const fetchTopStoriesList = function() {
-  const topStoriesUrl = `${apiBaseUrl}/topstories.json`;
-  return fetch(topStoriesUrl)
+const fetchJson = function(url) {
+  return fetch(url)
     .then(response => response.json());
 }
 
 const fetchTopStories = function() {
-  return fetchTopStoriesList()
+  const topStoriesUrl = `${apiBaseUrl}/topstories.json`;
+  return fetchJson(topStoriesUrl)
     .then(topStoryIds => {
-      const stories = topStoryIds.slice(0, 30).map(fetchStory);
+      const stories = topStoryIds
+        .slice(0, 30)
+        .map(storyId => {
+          let storyUrl = `${apiBaseUrl}/item/${storyId}.json`
+          return fetchJson(storyUrl);
+        });
       return Promise.all(stories);
     });
 }
@@ -47,11 +46,19 @@ window.addEventListener('load', () => {
 
   fetchTopStories()
   .then(stories => {
-    let storiesHtml = renderStories(stories);
+    const storiesHtml = renderStories(stories);
     document.getElementById('loading').style.display = 'none';
     document.getElementById('container').insertAdjacentHTML('beforeend', storiesHtml);
   })
-  // catch fallback - error page
+  .catch(err => {
+    console.log(err);
+    const errorHtml =
+      `<section class="error">
+        <p>Uh oh, something went wrong 😥 </p>
+      </section>`
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('container').insertAdjacentHTML('beforeend', errorHtml);
+  })
 
 });
 
