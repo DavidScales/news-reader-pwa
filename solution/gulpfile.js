@@ -143,7 +143,7 @@ function watch() {
   gulp.watch(paths.root.src, dist);
   gulp.watch(paths.images.src, copy, injectManifest);
 
-  // gulp.watch('dist/index.html', browserSync.reload);
+  gulp.watch('dist/index.html', browserSync.reload);
 }
 
 var dist = gulp.series(gulp.parallel(copy, styles, scripts), inline, injectManifest);

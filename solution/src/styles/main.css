@@ -32,6 +32,10 @@ header {
   width: 100%;
 }
 
+.header-title {
+  padding-right: 30px;
+}
+
 main {
   align-items: center;
   background-color: whitesmoke;
@@ -48,6 +52,18 @@ main {
 
 .primary-alt {
   color: #607d8b;
+}
+
+.primary a {
+  color: white;
+  text-decoration: none;
+}
+
+.primary a:active,
+.primary a:hover,
+.primary a:focus {
+  color: black;
+  text-decoration: underline;
 }
 
 img {
@@ -68,14 +84,20 @@ img {
   width: 50px;
 }
 
+.loading-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .loading {
   animation: rotate 1s infinite linear;
   border: 3px solid #607d8b;
   border-radius: 50%;
   border-right-color: transparent;
-  display: inline-block;
-  height: 50px;
-  width: 50px;
+  display: flex;
+  height: 40px;
+  width: 40px;
 }
 
 @keyframes rotate {
@@ -86,30 +108,6 @@ img {
   100% {
     transform: rotate(360deg);
   }
-}
-
-a {
-  color: black;
-  text-decoration: none;
-}
-
-a:active,
-a:hover,
-a:focus {
-  color: #3f51b5;
-  text-decoration: underline;
-}
-
-.primary a {
-  color: white;
-  text-decoration: none;
-}
-
-.primary a:active,
-.primary a:hover,
-.primary a:focus {
-  color: black;
-  text-decoration: underline;
 }
 
 .card {
@@ -124,12 +122,67 @@ a:focus {
   font-weight: 500;
 }
 
+.expandable {
+  display: none;
+}
+
+.question-wrapper {
+  padding: 15px 15px 0 15px;
+}
+
+.question-text {
+  background-color: aliceblue;
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 15px;
+  padding: 10px 15px 10px 15px;
+}
+
+.comments-wrapper {
+  padding: 20px 10px 0 10px;
+}
+
+.comment-text {
+  background-color: aliceblue;
+  margin: 10px;
+  padding: 10px 10px 5px 10px;
+}
+
+.removed {
+  color: #607d8b;
+  font-style: italic;
+  padding: 5px 5px 5px 20px;
+}
+
 .time {
   font-weight: 200;
 }
 
 .by {
   font-weight: 500;
+}
+
+.center {
+  text-align: center;
+}
+
+button {
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 36px;
+  letter-spacing: 0;
+  min-width: 64px;
+  overflow: hidden;
+  padding: 0 16px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
 }
 
 footer {

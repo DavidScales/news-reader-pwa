@@ -14,7 +14,7 @@ if (workbox) {
         cacheName: 'stories',
         plugins: [
           new workbox.expiration.Plugin({
-            maxEntries: 35,
+            maxEntries: 300,
             maxAgeSeconds: 5 * 60, // 5 minutes
           })
         ]
@@ -23,13 +23,10 @@ if (workbox) {
 
   workbox.routing.registerRoute(
     new RegExp('https://cdn.polyfill.io/(.*)'),
-    // workbox.strategies.staleWhileRevalidate()
     workbox.strategies.staleWhileRevalidate({
       cacheName: 'polyfills'
     })
   );
-
-
 
 } else {
   console.log(`Workbox didn't load 😬`);
